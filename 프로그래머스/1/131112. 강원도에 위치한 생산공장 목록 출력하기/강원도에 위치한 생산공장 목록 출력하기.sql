@@ -1,0 +1,12 @@
+-- 코드를 입력하세요
+SELECT
+    FACTORY_ID,
+    FACTORY_NAME,
+    ADDRESS
+FROM 
+    FOOD_FACTORY 
+-- 강원도에 위치한 식품공장
+WHERE
+    ADDRESS LIKE '강원도%'
+ORDER BY
+    FACTORY_ID ASC
