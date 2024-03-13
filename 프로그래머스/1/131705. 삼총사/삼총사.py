@@ -1,6 +1,5 @@
 def solution(number):
     answer = 0
-    # sorted(number)
     for idx1, val1 in enumerate(number):
         for idx2, val2 in enumerate(number):
             for idx3, val3 in enumerate(number):
