@@ -11,8 +11,8 @@ def solution(number):
     return answer
 
 #ref1
+from itertools import combinations
 def solution (number) :
-    from itertools import combinations
     cnt = 0
     for i in combinations(number,3) :
         if sum(i) == 0 :
