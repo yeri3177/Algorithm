@@ -14,5 +14,6 @@
 
 주로 다음 언어들을 사용하여 문제를 풀었습니다:
 
-- Python
+- Python 3
+- Java 11
 - SQL(ORACLE)
