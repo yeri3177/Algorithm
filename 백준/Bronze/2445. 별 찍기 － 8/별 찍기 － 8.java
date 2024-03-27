@@ -9,15 +9,13 @@ public class Main {
     }
 
     public static void solution(int count){
+        // 1~5줄
         for (int i = 1; i <= count; i++) {
             for (int a = 1; a <= i; a++) {
                 System.out.print("*");
             }
-            for (int b = count-i; b > 0; b--) {
-                System.out.print(" ");
-            }
 
-            for (int b = count-i; b > 0; b--) {
+            for (int b = 1; b <= 2*(count-i); b++) {
                 System.out.print(" ");
             }
             for (int a = 1; a <= i; a++) {
@@ -26,15 +24,12 @@ public class Main {
             System.out.println();
         }
 
+        // 6~10줄
         for (int i = 1; i < count; i++) {
             for (int a = count-1; a >= i; a--) {
                 System.out.print("*");
             }
-            for (int b = 1; b <= i; b++) {
-                System.out.print(" ");
-            }
-
-            for (int b = 1; b <= i; b++) {
+            for (int b = 1; b <= 2*i; b++) {
                 System.out.print(" ");
             }
             for (int a = count-1; a >= i; a--) {
