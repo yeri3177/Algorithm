@@ -2,21 +2,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-
 public class Main {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-
-        int N = Integer.parseInt(new StringBuilder(st.nextToken()).reverse().toString());
-        int M = Integer.parseInt(new StringBuilder(st.nextToken()).reverse().toString());
-
-        if (N > M) {
-            System.out.println(N);
-        }
-        else{
-            System.out.println(M);
-        }
+        System.out.println(Math.max(strReverseToInt(st.nextToken()), strReverseToInt(st.nextToken())));
+    }
+    static int strReverseToInt(String str){
+        return Integer.parseInt(new StringBuilder(str).reverse().toString());
     }
 }
