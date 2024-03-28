@@ -8,21 +8,17 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int cnt = Integer.parseInt(br.readLine());
-
         StringTokenizer st = new StringTokenizer(br.readLine());
+        br.close();
 
-        int[] score = new int[cnt];
-        int i = 0;
+        double max = 0, sum = 0;
+
         while (st.hasMoreTokens()) {
-            score[i++] = Integer.parseInt(st.nextToken());
+            int score = Integer.parseInt(st.nextToken());
+            max = Math.max(max, score);
+            sum += score;
         }
 
-        double max = Arrays.stream(score).max().getAsInt();
-        double sum = 0;
-        for (int sco : score) {
-            sum += sco/max*100;
-        }
-
-        System.out.println(sum/cnt);
+        System.out.println((sum/max*100)/cnt);
     }
 }
