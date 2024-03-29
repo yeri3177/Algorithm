@@ -1,41 +1,31 @@
-import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        br.close();
+        StringBuilder sb = new StringBuilder();
+        int length;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int count = sc.nextInt();
-        solution(count);
-    }
+        for (int row = 1, change = 1; row <= 2*N-1; row++) {
+            length = (N-change)*2;
 
-    public static void solution(int count){
-        // 1~5줄
-        for (int i = 1; i <= count; i++) {
-            for (int a = 1; a <= i; a++) {
-                System.out.print("*");
+            for (int starLeft = 0; starLeft < change; starLeft++) {
+                sb.append("*");
+            }
+            for (int blank = 0; blank < length; blank++) {
+                sb.append(" ");
+            }
+            for (int starRight = 0; starRight < change; starRight++) {
+                sb.append("*");
             }
 
-            for (int b = 1; b <= 2*(count-i); b++) {
-                System.out.print(" ");
-            }
-            for (int a = 1; a <= i; a++) {
-                System.out.print("*");
-            }
-            System.out.println();
+            if(row < N) change++;
+            else change--;
+            sb.append("\n");
         }
-
-        // 6~10줄
-        for (int i = 1; i < count; i++) {
-            for (int a = count-1; a >= i; a--) {
-                System.out.print("*");
-            }
-            for (int b = 1; b <= 2*i; b++) {
-                System.out.print(" ");
-            }
-            for (int a = count-1; a >= i; a--) {
-                System.out.print("*");
-            }
-            System.out.println();
-        }
+        System.out.println(sb);
     }
 }
