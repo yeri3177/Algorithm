@@ -8,7 +8,6 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-//        String str[] = new String[20];
         double totalSum = 0;
         double scoreSum = 0;
         String gradeList[] = {"A+", "A0", "B+", "B0", "C+", "C0", "D+", "D0", "F", "P"}; // 등급
@@ -28,9 +27,7 @@ public class Main {
                 }
             }
         }
-
-        double average = totalSum / scoreSum;
-        System.out.printf("%.6f", average);
+        System.out.printf("%.6f", totalSum / scoreSum);
         br.close();
     }
 }
