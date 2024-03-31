@@ -1,25 +1,25 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        br.close();
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
-        solution(num);
-    }
-
-    public static void solution(int n){
         int line = 1;
-
-        while (n > line) {
-            n -= line;
+        while (N > line) {
+            N -= line;
             line += 1;
         }
+        StringBuilder sb = new StringBuilder();
 
         if(line%2 == 0){
-            System.out.println(n + "/" + (line-n+1));
+            sb.append(N + "/" + (line-N+1));
         }else{
-            System.out.println((line-n+1) + "/" + n);
+            sb.append((line-N+1) + "/" + N);
         }
+        System.out.println(sb);
     }
 }
