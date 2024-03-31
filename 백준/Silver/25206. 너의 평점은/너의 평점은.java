@@ -1,65 +1,36 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String[] arr = new String[20];
+//        String str[] = new String[20];
+        double totalSum = 0;
+        double scoreSum = 0;
+        String gradeList[] = {"A+", "A0", "B+", "B0", "C+", "C0", "D+", "D0", "F", "P"}; // 등급
+        double gradeScore[] = {4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.0, 0.0, 0.0}; // 등급별 점수
 
         for (int i = 0; i < 20; i++) {
-            arr[i] = sc.nextLine();
-        }
+            st = new StringTokenizer(br.readLine());
 
-        double myGrade = 0;
-        double gradeSum = 0;
+            st.nextToken(); // 과목명
+            double score = Double.parseDouble(st.nextToken()); // 학점
+            String grade = st.nextToken(); // 등급
 
-        for(int i=0; i<20; i++){
-            String[] str = arr[i].split(" ");
-
-            double grade = Double.valueOf(str[1]);
-            String point = str[2];
-
-            switch (point){
-                case "A+":
-                    myGrade += 4.5 * grade;
-                    gradeSum += grade;
-                    break;
-                case "A0":
-                    myGrade += 4.0 * grade;
-                    gradeSum += grade;
-                    break;
-                case "B+":
-                    myGrade += 3.5 * grade;
-                    gradeSum += grade;
-                    break;
-                case "B0":
-                    myGrade += 3.0 * grade;
-                    gradeSum += grade;
-                    break;
-                case "C+":
-                    myGrade += 2.5 * grade;
-                    gradeSum += grade;
-                    break;
-                case "C0":
-                    myGrade += 2.0 * grade;
-                    gradeSum += grade;
-                    break;
-                case "D+":
-                    myGrade += 1.5 * grade;
-                    gradeSum += grade;
-                    break;
-                case "D0":
-                    myGrade += 1.0 * grade;
-                    gradeSum += grade;
-                    break;
-                case "F":
-                    myGrade += 0.0 * grade;
-                    gradeSum += grade;
-                    break;
+            for (int j = 0; j < 9; j++) {
+                if (grade.equals(gradeList[j])) {
+                    totalSum += score * gradeScore[j];
+                    scoreSum += score;
+                }
             }
         }
 
-        System.out.println(myGrade/gradeSum);
-
+        double average = totalSum / scoreSum;
+        System.out.printf("%.6f", average);
+        br.close();
     }
 }
