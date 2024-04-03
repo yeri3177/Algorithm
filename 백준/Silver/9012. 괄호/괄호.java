@@ -2,23 +2,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); // 입력용
+        StringBuilder sb = new StringBuilder(); // 출력용
         int N = Integer.parseInt(br.readLine());
-        Stack<Character> stack;
+        Stack<Character> stack = new Stack<>();
         String str;
         int length;
-        StringBuilder sb = new StringBuilder();
-        boolean ans;
+        boolean check;
 
         for (int i = 0; i < N; i++) {
-            ans = true;
+            check = true;
             str = br.readLine();
             length = str.length();
-            stack = new Stack<>();
 
             for(char x : str.toCharArray()){
                 if(x == '(') {
@@ -26,15 +24,15 @@ public class Main {
                 }
                 else {
                     if(stack.empty()) {
-                        ans = false;
+                        check = false;
                         break;
                     }
                     stack.pop();
                 }
             }
-            if(ans == false || !stack.empty()) sb.append("NO" + "\n");
+            if(check == false || !stack.empty()) sb.append("NO" + "\n");
             else sb.append("YES" + "\n");
-
+            stack.clear();
         }
         System.out.println(sb);
         br.close();
