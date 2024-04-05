@@ -21,21 +21,20 @@ public class Main {
             trees[i] = tree;
         }
 
-        // 2.
         int min = 0; // 최소값
 
         while (min < max) {
             int mid = (min + max) / 2; // 중간값
             long sum = 0;
 
-            // mid 길이로 잘랐을때 나무길이들 더하기
+            // mid 길이로 나무 잘랐을때 나무길이들 더하기
             for(int tree : trees) {
                 if(tree-mid > 0) {
                     sum += tree-mid;
                 }
             }
 
-            // sum보다 M이 크면 max를 mid길이로 해서 sum 크게 하기
+            // sum과 M비교 하여 max, min 길이 조절
             if(sum < M) {
                 max = mid;
             }
@@ -44,6 +43,7 @@ public class Main {
             }
         }
 
+        // 최소값 -> 정답
         System.out.println(min-1);
         br.close();
     }
