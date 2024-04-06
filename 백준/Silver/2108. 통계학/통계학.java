@@ -7,59 +7,56 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        int[] arr = new int[N];
+        int[] nums = new int[N];
 
-//        HashMap<Integer, Integer> map = new HashMap<>(); // 최빈값용 map
+        int[] frequency = new int[8001]; // 최빈값용 배열
         int sum = 0; // 산술평균용 합계
 
         for (int i = 0; i < N; i++) {
             int num = Integer.parseInt(br.readLine());
-            arr[i] = num;
+            nums[i] = num;
 
             sum += num; // 합계 구하기
-//            map.put(num, map.getOrDefault(num, 0) + 1);
+            frequency[num+4000]++; // 빈도수 담기
+        }
+
+        // 최빈값 찾기
+        // (1) 최대 빈도수 찾기
+        int max = 0;
+        for (int i = 0; i < 8001; i++) {
+            if(max < frequency[i]) max = frequency[i];
+        }
+        // (2) 최대 빈도수를 갖는 수 찾기
+        int mode = Integer.MIN_VALUE;
+        int isMore = 0;
+
+        for (int i = 0; i < 8001; i++) {
+            if(frequency[i] == max){
+                mode = i;
+                isMore++;
+
+                if(isMore >= 2) break;
+            }
         }
 
         // 배열 오름차순 정렬
-        Arrays.sort(arr);
+        Arrays.sort(nums);
 
         StringBuilder sb = new StringBuilder();
-        sb.append(Math.round((double) sum / N) + "\n"); // 산술평균 담기
-        sb.append(arr[N / 2] + "\n"); // 중앙값 담기
-        sb.append(solve(arr) + "\n"); // 최빈값 담기
-        sb.append(arr[N - 1] - arr[0]); // 범위 담기
+
+        // 1.산술평균 담기
+        sb.append(Math.round((double) sum / N) + "\n");
+
+        // 2.중앙값 담기
+        sb.append(nums[N / 2] + "\n");
+
+        // 3.최빈값 담기
+        sb.append(mode-4000 + "\n");
+
+        // 4.범위 담기
+        sb.append(nums[N - 1] - nums[0]);
+
         System.out.println(sb);
         br.close();
-    }
-
-    // 최빈값 구하기
-    static int solve(int[] arr){
-        int answer = 0;
-        int length = arr.length;
-        HashMap<Integer, Integer> map = new HashMap<>(); // 최빈값용 map
-
-        // 주어진 값이 1개면, 그 값을 리턴함
-        if(length == 1) return arr[0];
-
-        for (int i = 0; i < length; i++) {
-            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
-        }
-
-//        System.out.println(map);
-        List<Integer> keySet = new ArrayList<>(map.keySet());
-
-        // keySet 정렬
-        Collections.sort(keySet); // key 기준 오름차순
-        keySet.sort((o1, o2) -> map.get(o2).compareTo(map.get(o1))); // value 기준 내림차순
-
-        Iterator iterator = keySet.iterator();
-        int a = (int) iterator.next();
-        int b = (int) iterator.next();
-//        System.out.println(a + " : " + b);
-//        System.out.println("test : " + (a == b));
-        answer = (map.get(a) == map.get(b))? b : a;
-
-
-        return answer;
     }
 }
