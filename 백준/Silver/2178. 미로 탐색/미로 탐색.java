@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
-
 public class Main {
     static int N;
     static int M;
@@ -28,45 +27,34 @@ public class Main {
                 maze[row][col] = line.charAt(col-1) - '0';
             }
         }
-        System.out.println(bfs(1, 1));
+        bfs(1, 1);
+        System.out.println(maze[N][M]);
         br.close();
     }
 
-    private static int bfs(int x, int y) {
+    private static void bfs(int x, int y) {
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] {x,y});
         visited[x][y] = true;
-        Queue<Coordinate> q = new LinkedList<>();
-        q.add(new Coordinate(x, y, 1));
-
+        
         while (!q.isEmpty()) {
-            Coordinate c = q.poll();
-
-            if (c.x == N && c.y == M) return c.c;
+            int now[] = q.poll();
+            int nowX = now[0];
+            int nowY = now[1];
 
             for (int i = 0; i < 4; i++) {
-                int nowX = c.x + dx[i];
-                int nowY = c.y + dy[i];
+                int nextX = nowX + dx[i];
+                int nextY = nowY + dy[i];
 
-                if (nowX >= 1 && nowY >= 1 && nowX <= N && nowY <= M) {
-                    if (!visited[nowX][nowY] && maze[nowX][nowY] == 1) {
-                        visited[nowX][nowY] = true;
-                        q.add(new Coordinate(nowX, nowY, c.c + 1));
+                if (nextX >= 1 && nextY >= 1 && nextX <= N && nextY <= M) {
+                    if (!visited[nextX][nextY] && maze[nextX][nextY] == 1) {
+
+                        q.add(new int[]{nextX, nextY});
+                        visited[nextX][nextY] = true;
+                        maze[nextX][nextY] = maze[nowX][nowY] + 1;
                     }
                 }
             }
-        }
-        return 0;
-    }
-
-    // 좌표를 나타내는 클래스
-    static class Coordinate {
-        int x;
-        int y;
-        int c;
-
-        public Coordinate(int x, int y, int c) {
-            this.x = x;
-            this.y = y;
-            this.c = c;
         }
     }
 }
